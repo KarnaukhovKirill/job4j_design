@@ -2,8 +2,13 @@ package ru.job4j.generics;
 
 import static org.junit.Assert.assertThat;
 import static org.hamcrest.Matchers.is;
+import static org.junit.Assert.assertTrue;
+
 import org.junit.Test;
 import java.util.Iterator;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class SimpleArrayTest {
 
@@ -47,8 +52,20 @@ public class SimpleArrayTest {
     public void testIterator() {
         SimpleArray<String> array = new SimpleArray<>(1);
         Iterator<String> iterator = array.iterator();
-        assertThat(iterator.hasNext(), is(true));
-        array.add("First and Last");
         assertThat(iterator.hasNext(), is(false));
+        array.add("First and Last");
+        assertThat(iterator.hasNext(), is(true));
+    }
+
+    @Test
+    public void testIteratorByForEach() {
+        SimpleArray<String> array = new SimpleArray<>(3);
+        Iterator<String> iterator = array.iterator();
+        array.add("I");
+        array.add("love");
+        array.add("you");
+        assertThat(iterator.next(), is("I"));
+        assertTrue(iterator.hasNext());
+        assertThat(iterator.next(), is("love"));
     }
 }

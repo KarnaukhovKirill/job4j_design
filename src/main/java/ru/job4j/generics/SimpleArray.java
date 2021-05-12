@@ -1,6 +1,7 @@
 package ru.job4j.generics;
 
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 import java.util.Objects;
 
 public class SimpleArray<T> implements Iterable<T> {
@@ -13,10 +14,13 @@ public class SimpleArray<T> implements Iterable<T> {
     }
 
     public void add(T model) {
-        if (iterator().hasNext()) {
-            array[marker] = model;
-            size++;
+        marker = 0;
+        while (iterator().hasNext()) {
+            marker++;
         }
+        array[marker] = model;
+        size++;
+        marker = 0;
     }
 
     public T get(int index) {
@@ -40,17 +44,16 @@ public class SimpleArray<T> implements Iterable<T> {
     public Iterator<T> iterator() {
         return new Iterator<>() {
             @Override
-            public T next() {  //так как в 75 % случаев в методах класса SimpleArray мы используем index,
-                return null;   //т.е. напрямую указываем элемент, то метод next не используется.
+            public T next() {
+                if (!hasNext()) {
+                    throw new NoSuchElementException();
+                }
+                return array[marker++];
             }
 
             @Override
-            public boolean hasNext() {  //метод hasNext используется только в методе add, чтобы найти первый !null
-                marker = 0;
-                while (array[marker] != null && marker < array.length - 1) {
-                    marker++;
-                }
-                return size < array.length;
+            public boolean hasNext() {
+                return marker < size;
             }
         };
     }
