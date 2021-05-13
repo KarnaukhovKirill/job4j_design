@@ -14,11 +14,11 @@ public final class MemStore<T extends Base> implements Store<T> {
 
     @Override
     public boolean replace(String id, T model) {
-        T obj = findById(id);
-        if (obj == null) {
+        int index = findIndexById(id);
+        if (index < 0) {
             return false;
         } else {
-            mem.set(mem.indexOf(obj), model);
+            mem.set(index, model);
         }
         return true;
     }
@@ -45,5 +45,16 @@ public final class MemStore<T extends Base> implements Store<T> {
             }
         }
         return null;
+    }
+
+    @Override
+    public int findIndexById(String id) {
+        T obj = findById(id);
+        if (obj != null) {
+            mem.indexOf(obj);
+        } else {
+            return -1;
+        }
+        return mem.indexOf(obj);
     }
 }
