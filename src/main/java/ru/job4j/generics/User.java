@@ -25,4 +25,5 @@ public class User extends Base {
         return getId().equals(newUser.getId());
     }
 
+    //comment for commit
 }
