@@ -25,36 +25,32 @@ public final class MemStore<T extends Base> implements Store<T> {
 
     @Override
     public boolean delete(String id) {
-        T obj = findById(id);
-        if (obj == null) {
+        int index = findIndexById(id);
+        if (index < 0) {
             return false;
         } else {
-            mem.remove(obj);
+            mem.remove(index);
         }
-        return false;
+        return true;
     }
 
     @Override
     public T findById(String id) {
-        int index = 0;
-        for (T m : mem) {
-            if (id.equals(m.getId())) {
-                return mem.get(index);
-            } else {
-                index++;
-            }
+        int index = findIndexById(id);
+        if (index < 0) {
+            return null;
         }
-        return null;
+        return mem.get(index);
     }
 
-    @Override
     public int findIndexById(String id) {
-        T obj = findById(id);
-        if (obj != null) {
-            mem.indexOf(obj);
-        } else {
-            return -1;
-        }
-        return mem.indexOf(obj);
+        int rsl = -1;
+            for (int index = 0; index < mem.size(); index++) {
+                if (mem.get(index).getId().equals(id)) {
+                    rsl = index;
+                    break;
+                }
+            }
+        return rsl;
     }
 }
