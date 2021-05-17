@@ -43,4 +43,23 @@ public class ForwardLinkedTest {
         linked.addLast("Must Exception");
         iterator.next();
     }
+
+    @Test
+    public void whenRevertIsOn() {
+        ForwardLinked<String> linked = new ForwardLinked<>();
+        linked.addLast("First");
+        linked.addLast("Second");
+        linked.addLast("Third");
+        linked.revert();
+        assertThat(linked.deleteFirst(), is("Third"));
+        assertThat(linked.deleteFirst(), is("Second"));
+        assertThat(linked.deleteFirst(), is("First"));
+    }
+
+    @Test
+    public void whenRevertIsNotNecessary() {
+        ForwardLinked<String> linked = new ForwardLinked<>();
+        linked.addLast("First");
+        assertThat(linked.revert(), is(false));
+    }
 }
