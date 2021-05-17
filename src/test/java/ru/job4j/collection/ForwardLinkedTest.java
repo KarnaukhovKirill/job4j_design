@@ -14,7 +14,7 @@ public class ForwardLinkedTest {
     @Test(expected = NoSuchElementException.class)
     public void whenDeleteFirst() {
         ForwardLinked<Integer> linked = new ForwardLinked<>();
-        linked.add(1);
+        linked.addLast(1);
         linked.deleteFirst();
         linked.iterator().next();
     }
@@ -28,8 +28,8 @@ public class ForwardLinkedTest {
     @Test
     public void whenMultiDelete() {
         ForwardLinked<Integer> linked = new ForwardLinked<>();
-        linked.add(1);
-        linked.add(2);
+        linked.addLast(1);
+        linked.addLast(2);
         assertThat(linked.deleteFirst(), is(1));
         Iterator<Integer> it = linked.iterator();
         assertThat(it.next(), is(2));
@@ -38,9 +38,9 @@ public class ForwardLinkedTest {
     @Test(expected = ConcurrentModificationException.class)
     public void whenIteratorThrowCME() {
         ForwardLinked<String> linked = new ForwardLinked<>();
-        linked.add("Hello");
+        linked.addLast("Hello");
         Iterator<String> iterator = linked.iterator();
-        linked.add("Must Exception");
+        linked.addLast("Must Exception");
         iterator.next();
     }
 }
