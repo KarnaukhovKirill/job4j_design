@@ -8,7 +8,18 @@ public class ForwardLinked<T> implements Iterable<T> {
     private Node<T> head;
     private int modCount = 0;
 
-    public void add(T value) {
+    public void addFirst(T value) {
+        Node<T> node = new Node<>(value, null);
+        if (head == null) {
+            head = node;
+            return;
+        }
+        node.next = head;
+        head = node;
+        modCount++;
+    }
+
+    public void addLast(T value) {
         Node<T> node = new Node<>(value, null);
         if (head == null) {
             head = node;
