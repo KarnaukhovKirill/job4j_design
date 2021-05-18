@@ -51,12 +51,8 @@ public class ListUtils {
     public static <T> void removeAll(List<T> list, List<T> elements) {
         ListIterator<T> i = list.listIterator();
         while (i.hasNext()) {
-            i.next();
-            for (T element : elements) {
-                i.previous();
-                if (element.equals(i.next())) {
-                    i.remove();
-                }
+            if (elements.contains(i.next())) {
+                i.remove();
             }
         }
     }
