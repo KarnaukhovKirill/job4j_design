@@ -26,7 +26,7 @@ public class SimpleMap<K, V> implements Map<K, V> {
         return true;
     }
 
-    private void grow() {
+    private void grow() { //added Method
         MapEntry<K, V>[] buffer = table;
         table = new MapEntry[table.length * 2];
         capacity = table.length * 2;

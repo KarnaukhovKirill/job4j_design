@@ -11,16 +11,6 @@ import static org.junit.Assert.*;
 public class SimpleMapTest {
 
     @Test
-    public void testIteratorNext() {
-        Map<String, String> myMap = new SimpleMap<>();
-        myMap.put("Moscow", "First");
-        myMap.put("New York", "Second");
-        Iterator<String> iterator = myMap.iterator();
-        assertThat(iterator.next(), is("New York"));
-        assertThat(iterator.next(), is("Moscow"));
-    }
-
-    @Test
     public void testPut() {
         Map<String, Integer> myMap = new SimpleMap<>();
         myMap.put("First", 1);
