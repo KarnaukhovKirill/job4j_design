@@ -16,8 +16,8 @@ public class SimpleMapTest {
         myMap.put("Moscow", "First");
         myMap.put("New York", "Second");
         Iterator<String> iterator = myMap.iterator();
-        assertThat(iterator.next(), is("Moscow"));
         assertThat(iterator.next(), is("New York"));
+        assertThat(iterator.next(), is("Moscow"));
     }
 
     @Test
@@ -39,10 +39,9 @@ public class SimpleMapTest {
 
     @Test
     public void testGet() {
-        Map<String, User> myMap = new SimpleMap<>();
-        User anton = new User("Anton", 3, new GregorianCalendar(1990, 1, 23));
-        myMap.put(anton.getName(), anton);
-        assertThat(myMap.get("Anton"), is(anton));
+        Map<String, String> myMap = new SimpleMap<>();
+        myMap.put("Moscow", "First");
+        assertThat(myMap.get("Moscow"), is("First"));
         assertNull(myMap.get("Stefan"));
     }
 
