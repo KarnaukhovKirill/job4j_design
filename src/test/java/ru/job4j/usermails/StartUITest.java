@@ -60,9 +60,9 @@ public class StartUITest {
         maps.put(user5.getName(), user5.getEmails());
         UsersBase usersBase = new UsersBase();
         Map<String, List<String>> finalize = usersBase.merge(maps);
-        assertThat(finalize.toString(), is("{user1=[aaa@bbb.ru, ups@pisem.net, " +
-                "lol@mail.ru, xxx@ya.ru, " +
-                "foo@gmail.com], " +
-                "user5=[vasya@pupkin.com, xyz@pisem.net]}"));
+        assertThat(finalize.toString(), is("{user1=[aaa@bbb.ru, ups@pisem.net, "
+                + "lol@mail.ru, xxx@ya.ru, "
+                + "foo@gmail.com], "
+                + "user5=[vasya@pupkin.com, xyz@pisem.net]}"));
     }
 }
