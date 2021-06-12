@@ -41,9 +41,7 @@ public class UsersBase {
     }
 
     public Map<String, List<String>> merge(Map<String, List<String>> input) {
-        int count = 0;
         Map<String, List<String>> output = new HashMap<>();
-        Map<String, List<String>> finalize = new HashMap<>();
         for (Map.Entry<String, List<String>> map : input.entrySet()) {
             String key = map.getKey();
             List<String> value = map.getValue();
@@ -52,24 +50,18 @@ public class UsersBase {
                 continue;
             }
             for (Map.Entry<String, List<String>> map2 : output.entrySet()) {
-                if (Collections.disjoint(value, map2.getValue())) {
-                    count++;
+                if (!Collections.disjoint(value, map2.getValue())) {
+                    Set<String> set = new HashSet<>(value);
+                    set.addAll(map2.getValue());
+                    List<String> end = new ArrayList<>(set);
+                    map2.getValue().clear();
+                    map2.getValue().addAll(end);
                 } else {
-                    Set<String> startSet = new HashSet<>(map2.getValue());
-                    startSet.addAll(value);
-                    List<String> end = startSet.stream().collect(Collectors.toList());
-                    output.put(map2.getKey(), end);
-                    break;
-                }
-                if (count == output.size()) {
                     output.put(key, value);
-                    count = 0;
                     break;
                 }
             }
-
         }
-        usersBase = output;
         return output;
     }
 }
