@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 import java.util.StringJoiner;
 
 public class Config {
@@ -20,11 +21,10 @@ public class Config {
                     .filter(s -> !s.startsWith("#") && s.contains("="))
                     .map(s -> s.trim().split("="))
                     .filter(s -> {
-                        if (s.length > 1) {
-                            return true;
-                        } else {
-                            throw new IllegalArgumentException();
+                        if (s.length <= 1) {
+                            throw new IllegalArgumentException("Value is empty");
                         }
+                        return true;
                     })
                     .forEach(s -> values.put(s[0], s[1]));
         } catch (IllegalArgumentException e) {
@@ -35,10 +35,8 @@ public class Config {
     }
 
     public String value(String key) {
-        if (!values.containsKey(key)) {
-            throw new UnsupportedOperationException("Don't impl this method yet!");
-        }
-        return values.get(key);
+        Optional<String> rsl = Optional.ofNullable(values.get(key));
+        return rsl.orElse("Nothing");
     }
 
     @Override

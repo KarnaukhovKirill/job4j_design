@@ -31,11 +31,12 @@ public class ConfigTest {
         assertThat(config.value("JavaIsBest?"), is("Yes"));
     }
 
-    @Test (expected = UnsupportedOperationException.class)
-    public void whenKeyNotFound() {
+    @Test
+    public void whenKeyIsWrong() {
         String path = "logSpace.properties";
         Config config = new Config(path);
         config.load();
-        assertThat(config.value("YaYaDingDong"), is("NotExist"));
+        assertThat(config.value("JavaIsBest?"), is("Yes"));
+        assertThat(config.value("Wrong"), is("Nothing"));
     }
 }
