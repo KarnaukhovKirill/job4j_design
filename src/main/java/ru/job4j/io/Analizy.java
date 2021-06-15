@@ -1,13 +1,9 @@
 package ru.job4j.io;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Deque;
-import java.util.LinkedList;
-import java.util.List;
 
 public class Analizy {
-    List<String> list = new ArrayList<>();
+    StringBuilder rsl = new StringBuilder();
     private boolean flag = true;
 
     public void unavailable(String source, String target) {
@@ -16,28 +12,25 @@ public class Analizy {
             while ((line = in.readLine()) != null) {
                 if ((line.startsWith("500") || line.startsWith("400")) && flag) {
                     flag = false;
-                    list.add(line.split(" ")[1]);
+                    rsl.append(line.split(" ")[1]);
+                    rsl.append(";");
                 }
                 if ((line.startsWith("200") || line.startsWith("300")) && !flag) {
                     flag = true;
-                    list.add(line.split(" ")[1]);
+                    rsl.append(line.split(" ")[1]);
+                    rsl.append(System.lineSeparator());
                 }
             }
+            save(target);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        try (PrintWriter out = new PrintWriter(new FileOutputStream(target))) {
-            int index = 0;
-            for (String time : list) {
-                if (index == 0) {
-                    out.print(time + ";");
-                    index++;
-                } else if (index == 1) {
-                    out.println(time);
-                    index = 0;
-                }
 
-            }
+    }
+
+    private void save(String target) {
+        try (PrintWriter out = new PrintWriter(new FileOutputStream(target))) {
+            out.println(rsl);
         } catch (Exception e) {
             e.printStackTrace();
         }
