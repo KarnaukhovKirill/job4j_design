@@ -4,7 +4,6 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Optional;
 import java.util.StringJoiner;
 
 public class Config {
@@ -35,8 +34,7 @@ public class Config {
     }
 
     public String value(String key) {
-        Optional<String> rsl = Optional.ofNullable(values.get(key));
-        return rsl.orElse("Nothing");
+        return values.get(key);
     }
 
     @Override
