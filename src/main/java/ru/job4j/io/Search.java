@@ -9,8 +9,12 @@ import java.util.function.Predicate;
 
 public class Search {
     public static void main(String[] args) throws IOException {
-        Path start = Paths.get(".");
-        search(start, p -> p.toFile().getName().endsWith("txt")).forEach(System.out::println);
+        if (args.length < 2) {
+            throw new IllegalArgumentException("Usage java -jar dir.jar ROOT_FOLDER EXTENSION");
+        }
+        Path start = Paths.get(args[0]);
+        String extension = args[1];
+        search(start, p -> p.toFile().getName().endsWith(extension)).forEach(System.out::println);
     }
 
     public static List<Path> search(Path root, Predicate<Path> condition) throws IOException {
