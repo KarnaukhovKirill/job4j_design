@@ -14,7 +14,7 @@ public class Config {
         this.path = path;
     }
 
-    public void load() {  //считать все ключи в карту values
+    public void load() {
         try (BufferedReader in = new BufferedReader(new FileReader(this.path))) {
             in.lines()
                     .filter(s -> !s.startsWith("#") && s.contains("="))
@@ -26,8 +26,6 @@ public class Config {
                         return true;
                     })
                     .forEach(s -> values.put(s[0], s[1]));
-        } catch (IllegalArgumentException e) {
-            throw new IllegalArgumentException(e.getMessage());
         } catch (Exception e) {
             e.printStackTrace();
         }
