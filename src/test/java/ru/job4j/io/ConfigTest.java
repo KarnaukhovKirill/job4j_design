@@ -1,5 +1,6 @@
 package ru.job4j.io;
 
+import jdk.jfr.StackTrace;
 import org.junit.Test;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertNull;
@@ -14,14 +15,6 @@ public class ConfigTest {
         config.load();
         assertThat(config.value("hibernate.connection.username"), is("postgres"));
         assertThat(config.value("hibernate.dialect"), is("org.hibernate.dialect.PostgreSQLDialect"));
-    }
-
-    @Test (expected = IllegalArgumentException.class)
-    public void whenValueIsEmpty() {
-            String path = "logEmpty.properties";
-            Config config = new Config(path);
-            config.load();
-            assertThat(config.value("YayaDingDong"), is("Value is empty"));
     }
 
     @Test
