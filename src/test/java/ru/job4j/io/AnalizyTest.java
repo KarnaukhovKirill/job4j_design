@@ -9,7 +9,6 @@ import org.junit.rules.TemporaryFolder;
 import java.io.*;
 
 public class AnalizyTest {
-    String ln = System.lineSeparator();
 
     @Rule
     public TemporaryFolder folder = new TemporaryFolder();
@@ -20,18 +19,18 @@ public class AnalizyTest {
         File source = folder.newFile("source.txt");
         File target = folder.newFile("target.txt");
         try (PrintWriter out = new PrintWriter(source)) {
-            out.print("200 10:56:01" + ln
-                    + "500 10:57:01" + ln
-                    + "400 10:58:01" + ln
-                    + "200 10:59:01" + ln
-                    + "500 11:01:02" + ln
-                    + "200 11:02:02" + ln
-                    + "200 10:56:01" + ln
-                    + "500 10:57:01" + ln
-                    + "400 10:58:01" + ln
-                    + "500 10:59:01" + ln
-                    + "400 11:01:02" + ln
-                    + "200 11:02:02");
+            out.println("200 10:56:01");
+            out.println("500 10:57:01");
+            out.println("400 10:58:01");
+            out.println("200 10:59:01");
+            out.println("500 11:01:02");
+            out.println("200 11:02:02");
+            out.println("200 10:56:01");
+            out.println("500 10:57:01");
+            out.println("400 10:58:01");
+            out.println("500 10:59:01");
+            out.println("400 11:01:02");
+            out.println("200 11:02:02");
         }
         analizy.unavailable(source.getAbsolutePath(), target.getAbsolutePath());
         StringBuilder rsl = new StringBuilder();
@@ -42,5 +41,4 @@ public class AnalizyTest {
                                         + "11:01:02;11:02:02"
                                         + "10:57:01;11:02:02"));
     }
-
 }
