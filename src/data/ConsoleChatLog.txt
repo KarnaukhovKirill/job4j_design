@@ -1,0 +1,15 @@
+Start of LOG
+People say : Hello
+Bot answer : Сегодня хороший день для этого
+People say : Для чего? 
+Bot answer : Как тебя зовут?
+People say : Кирилл
+Bot answer : Пока
+People say : стоп
+People say : не пока
+People say : я только начал
+People say : продолжить
+People say : Я на коне
+Bot answer : Не знаю
+People say : закончить
+The End of LOG
