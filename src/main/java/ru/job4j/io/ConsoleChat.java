@@ -20,12 +20,12 @@ public class ConsoleChat {
 
     public void run() {
         List<String> log = new ArrayList<>();
+        List<String> listAnswers = takeAnswer(botAnswers);
         String peopleAnswer = "";
         log.add("Start of LOG");
+        Scanner scanner = new Scanner(System.in);
         while (!peopleAnswer.equals(OUT)) {
-            String botAnswer = takeAnswer(botAnswers);
             System.out.println("Введите слово");
-            Scanner scanner = new Scanner(System.in);
             peopleAnswer = scanner.nextLine();
             if (peopleAnswer.equals(STOP)) {
                 log.add("People say : " + peopleAnswer);
@@ -40,6 +40,8 @@ public class ConsoleChat {
                 log.add("The End of LOG");
             } else {
                 log.add("People say : " + peopleAnswer);
+                int index = (int) (Math.random() * listAnswers.size());
+                String botAnswer = listAnswers.get(index);
                 log.add("Bot answer : " + botAnswer);
                 System.out.println(botAnswer);
             }
@@ -56,15 +58,14 @@ public class ConsoleChat {
         }
     }
 
-    private String takeAnswer(String botAnswers) {
+    private List<String> takeAnswer(String botAnswers) {
         List<String> answer = new ArrayList<>();
         try (BufferedReader in = new BufferedReader(new FileReader(botAnswers, StandardCharsets.UTF_8))) {
             in.lines().forEach(answer::add);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        int index = (int) (Math.random() * answer.size());
-        return answer.get(index);
+        return answer;
     }
 
     public static void main(String[] args) {
