@@ -19,14 +19,22 @@ public class EchoServer {
                         if (str.contains("/?msg=")) {
                             String[] line = str.split(" ");
                             String[] msg = line[1].split("=");
-                            if (msg[1].equals("Bye")) {
+                            if (msg[1].equals("Exit")) {
+                                out.write("HTTP/1.1 200 OK\r\n\r\n".getBytes());
+                                out.write("Server is closed".getBytes());
                                 server.close();
                                 break;
                         }
+                            if (msg[1].equals("Hello")) {
+                                out.write("HTTP/1.1 200 OK\r\n\r\n".getBytes());
+                                out.write("Hello".getBytes());
+                                continue;
+                            }
+                            out.write("HTTP/1.1 200 OK\r\n\r\n".getBytes());
+                            out.write(msg[1].getBytes());
                         }
                         System.out.println(str);
                     }
-                    out.write("HTTP/1.1 200 OK\r\n".getBytes());
                 }
             }
         }
