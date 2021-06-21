@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<BookShelf countPlace="4" isEmpty="true" name="10B" genre="HISTORY">
+    <books>
+        <book name="East Asia at the Center" pages="150"/>
+        <book name="1941 - 1945" pages="1000"/>
+    </books>
+</BookShelf>
