@@ -19,6 +19,14 @@ public class Book {
         this.pages = pages;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public int getPages() {
+        return pages;
+    }
+
     @Override
     public String toString() {
         return "Book{"

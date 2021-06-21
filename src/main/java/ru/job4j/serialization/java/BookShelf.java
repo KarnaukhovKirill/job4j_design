@@ -27,6 +27,26 @@ public class BookShelf {
         this.books = books;
     }
 
+    public int getCountPlace() {
+        return countPlace;
+    }
+
+    public boolean isEmpty() {
+        return isEmpty;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public Genre getGenre() {
+        return genre;
+    }
+
+    public Book[] getBooks() {
+        return books;
+    }
+
     @Override
     public String toString() {
         return "BookShelf{"
