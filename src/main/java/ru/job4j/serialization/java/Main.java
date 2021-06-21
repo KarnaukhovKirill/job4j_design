@@ -1,36 +1,30 @@
 package ru.job4j.serialization.java;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.Marshaller;
+import javax.xml.bind.Unmarshaller;
+import java.io.StringReader;
+import java.io.StringWriter;
 
-import java.io.FileOutputStream;
-import java.io.OutputStream;
 
 public class Main {
-    public static void main(String[] args) {
-        Book[] books = new Book[] {new Book("East Asia at the Center", 150)};
+    public static void main(String[] args) throws Exception {
+        Book[] books = new Book[] {new Book("East Asia at the Center", 150),
+                new Book("1941-1945", 250)};
         BookShelf firstShelf = new BookShelf(true, Genre.HISTORY, books);
-        final Gson gson = new GsonBuilder().create();
-        try (FileOutputStream fos = new FileOutputStream("json.txt")) {
-            fos.write(gson.toJson(firstShelf).getBytes());
-        } catch (Exception e) {
-            e.printStackTrace();
+        JAXBContext context = JAXBContext.newInstance(BookShelf.class);
+        Marshaller marshaller = context.createMarshaller();
+        marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+        String xml;
+        try (StringWriter writer = new StringWriter()) {
+            marshaller.marshal(firstShelf, writer);
+            xml = writer.getBuffer().toString();
+            System.out.println(xml);
         }
-        System.out.println(gson.toJson(firstShelf));
-        final String shelfJson = "{"
-                                + "\"countPlace\":4,"
-                                + "\"isEmpty\":true,"
-                                + "\"name\":10B, "
-                                + "\"genre\":HISTORY, "
-                                  + "\"books\":"
-                                        + "["
-                                                + "{"
-                                                + "\"name\":\"East Asia at the Center\", "
-                                        + "\"pages\":150"
-                                                + "}"
-                                        + "]"
-                                    + "}";
-        final BookShelf shelfMod = gson.fromJson(shelfJson, firstShelf.getClass());
-        System.out.println(shelfMod.toString());
+        Unmarshaller unmarshaller = context.createUnmarshaller();
+        try (StringReader reader = new StringReader(xml)) {
+            BookShelf result = (BookShelf) unmarshaller.unmarshal(reader);
+            System.out.println(result);
+        }
     }
 }
