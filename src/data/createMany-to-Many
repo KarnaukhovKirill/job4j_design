@@ -1,0 +1,23 @@
+create table people (
+	id serial primary key,
+	name varchar(255),
+	age int
+);
+create table injures (
+	id serial primary key,
+	name varchar(255),
+	severity int
+);
+create table people_injures (
+	id serial primary key,
+	people_id int references people(id),
+	injures_id int references injures(id)
+);
+insert into people(name, age) values('Sergei', 32);
+insert into people(name, age) values('Vladimir', 25);
+insert into injures(name, severity) values('bruised hip', 4);
+insert into injures(name, severity) values('broken leg', 7);
+
+insert into people_injures(people_id, injures_id) values (1, 1);
+insert into people_injures(people_id, injures_id) values (2, 1);
+insert into people_injures(people_id, injures_id) values (2, 2);

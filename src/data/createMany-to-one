@@ -1,0 +1,14 @@
+create table computer (
+	id serial primary key,
+	ip_adress varchar(255)
+);
+create table mouse (
+	id serial primary key,
+	name varchar(255),
+	computer_id int references computer(id)
+);
+insert into computer(ip_adress) values ('95.30.233.119');
+insert into mouse(name, computer_id) values ('SteelSeries', 1);
+insert into mouse(name, computer_id) values ('G200', 1);
+
+select * from mouse; 

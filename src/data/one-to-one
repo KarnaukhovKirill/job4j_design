@@ -1,0 +1,13 @@
+create table people (
+	id serial primary key,
+	name varchar(255),
+	age int
+);
+create table country (
+	id serial primary key,
+	name varchar(255),
+	president int references people(id) unique
+);
+insert into people(name, age) values('Sergei', 32);
+insert into people(name, age) values('Vladimir', 25);
+insert into country(name, president) values('Russia', 2); 
