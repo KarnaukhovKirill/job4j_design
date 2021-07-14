@@ -1,0 +1,10 @@
+create table car (
+	id serial primary key,
+	name text,
+	power integer,
+	price real,
+	sold_now boolean
+);
+update car set power=200;
+delete from car;
+select * from car;
