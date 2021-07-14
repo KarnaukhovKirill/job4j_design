@@ -20,10 +20,6 @@ public class CheckInputArgs {
         if (!name.contains(".") && !name.contains("*")) {
             throw new IllegalArgumentException("Name is invalid. Example: *.txt, fullname.exe");
         }
-//        File output = new File(argsName.get("o"));
-//        if (output.getName().length() < 1) {
-//            return false;
-//        }
         String type = argsName.get("t").toLowerCase(Locale.ROOT);
         return (type.equals("mask") || type.equals("name") || type.equals("regex"));
     }
