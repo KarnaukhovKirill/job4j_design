@@ -1,13 +1,13 @@
-create table people (
+create table capital (
 	id serial primary key,
 	name varchar(255),
-	age int
+	population int
 );
 create table country (
 	id serial primary key,
 	name varchar(255),
-	president int references people(id) unique
+	capital int references capital(id) unique
 );
-insert into people(name, age) values('Sergei', 32);
-insert into people(name, age) values('Vladimir', 25);
-insert into country(name, president) values('Russia', 2); 
+insert into capital(name, population) values('London', 3000000);
+insert into people(name, population) values('Canberra', 250000);
+insert into country(name, capital) values('Australia', 2);
