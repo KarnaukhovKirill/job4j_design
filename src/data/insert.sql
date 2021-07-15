@@ -1,0 +1,10 @@
+insert into roles(title) values ('Admin');
+insert into roles(title) values ('User');
+insert into states(status) values ('Не прочитано');
+insert into category(name) values ('Важно');
+insert into rules(name) values ('Unlimited');
+insert into role_rules(role_id, rule_id) values (1, 1);
+insert into users(name, age, role_id) values ('FirstUser', 30, 1);
+insert into item(user_id, category_id, state_id) values (1, 1, 1);
+insert into comments(commentary, item_id) values ('Это комментарий для первой заявки', 1);
+insert into attachs(url, item_id) values ('www.img.ru/funny.jpeg', 1);
