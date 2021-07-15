@@ -6,6 +6,7 @@ import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
 import java.util.Locale;
 import java.util.function.Predicate;
 
@@ -23,16 +24,31 @@ public class Start {
             e.printStackTrace();
         }
         var predicate = predicate(argsName);
-        SearchFiles searchFiles = new SearchFiles(predicate);
+        SearchFiles searchFiles = searchFiles(argsName, predicate);
+        List<Path> listPath = searchFiles.getList();
+        writeResult(listPath, argsName);
+    }
+
+    private static void writeResult(List<Path> listPath, ArgsName argsName) {
         try (PrintWriter out = new PrintWriter(
                 new BufferedOutputStream(
                         new FileOutputStream(argsName.get("o"))
                 ))) {
-            Files.walkFileTree(Paths.get(argsName.get("d")), searchFiles);
-            searchFiles.getList().stream().map(path -> path.toFile().getName()).forEach(out::println);
+            listPath.stream().map(path -> path.toFile().getName()).forEach(out::println);
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+    }
+
+    private static SearchFiles searchFiles(ArgsName argsName, Predicate<Path> predicate) {
+        SearchFiles searchFiles = new SearchFiles(predicate);
+        try {
+            Files.walkFileTree(Paths.get(argsName.get("d")), searchFiles);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return searchFiles;
     }
 
     private static Predicate<Path> predicate(ArgsName argsName) {
