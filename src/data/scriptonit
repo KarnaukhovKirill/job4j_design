@@ -1,0 +1,21 @@
+create table artist (
+	id serial primary key,
+	name varchar(255),
+	genre varchar(255)
+);
+create table album (
+	id serial primary key,
+	title varchar (255),
+	realease date,
+	artist_id int references artist(id)
+);
+
+insert into artist(name, genre) values ('Скриптонит', 'Хип-хоп');
+
+insert into album(title, realease, artist_id) values ('Дом с нормальными явлениями', '2015-11-24', 1);
+insert into album(title, realease, artist_id) values ('Праздник на улице 36', '2017-05-24', 1);
+insert into album(title, realease, artist_id) values ('Уроборс', '2017-12-16', 1);
+
+select ar.name, ar.genre, al.title, al.realease from album as al join artist as ar on al.artist_id = ar.id;
+select ar.name, ar.genre, al.title, al.realease from album as al join artist as ar on al.realease > '2016-01-01'; 
+select ar.name as Имя, ar.genre as Жанр, al.title as Название, al.realease as Дата_релиза from album as al join artist as ar on al.artist_id = ar.id; 
