@@ -1,0 +1,27 @@
+create table departments (
+	id serial primary key,
+	name varchar(255)
+);
+create table emploees (
+	id serial primary key,
+	name varchar(255),
+	department_id int references departments(id)
+);
+insert into departments(name) values ('Биология'), ('Физика'), ('Математика'), ('Отдел бездельников');
+insert into emploees(name, department_id) values ('Алла', 1), ('Максим', 1), ('Филипп', 2), ('Борис', 3), ('Елена', null);
+
+-- Выполнить запросы с left, rigth, full, cross соединениями
+select * from emploees e right join departments d on d.id = e.department_id where e.department_id is not null;
+select * from emploees e left join emploees d on d.id = e.department_id;
+select * from emploees e full join emploees d on d.id = e.department_id;
+select * from emploees e cross join emploees d;
+
+-- Используя left join найти департаменты, у которых нет работников
+select * from departments d left join emploees e on d.id = e.department_id where e.department_id is null;
+
+-- Используя left и right join написать запросы, которые давали бы одинаковый результат.
+select * from emploees e left join departments d on e.department_id = d.id;
+select * from departments d right join emploees e on d.id = e.department_id;
+
+-- Создать таблицу teens с атрибутами name, gender и заполнить ее. Используя cross join составить все возможные разнополые пары
+select * from teens as one cross join teens as two where one.gender != two.gender;
