@@ -36,6 +36,6 @@ join
 transmission as tm on c.transmission_id = tm.id;
 
 -- Вывести отдельно детали (1 деталь - 1 запрос), которые не используются НИ в одной машине, кузова, двигатели, коробки передач
-select car_body.type from car full join car_body on car_body.id = car.car_body_id where car.car_body_id is null;
-select engine.type, engine.code from car full join engine on car.engine_id = engine.id where car.engine_id is null;
-select tm.type, tm.code from car full join transmission as tm on car.transmission_id = tm.id where car.transmission_id is null;
+select car_body.type from car right join car_body on car_body.id = car.car_body_id where car.car_body_id is null;
+select engine.type, engine.code from car right join engine on car.engine_id = engine.id where car.engine_id is null;
+select tm.type, tm.code from car right join transmission as tm on car.transmission_id = tm.id where car.transmission_id is null;
