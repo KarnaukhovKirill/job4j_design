@@ -46,8 +46,4 @@ public class Config {
         }
         return out.toString();
     }
-
-    public static void main(String[] args) {
-        System.out.println(new Config("app.properties"));
-    }
 }

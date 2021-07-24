@@ -62,6 +62,11 @@
       <artifactId>json</artifactId>
       <version>20200518</version>
     </dependency>
+    <dependency>
+      <groupId>org.postgresql</groupId>
+      <artifactId>postgresql</artifactId>
+      <version>42.2.23</version>
+    </dependency>
   </dependencies>
 
   <build>
@@ -77,10 +82,10 @@
               <goal>shade</goal>
             </goals>
             <configuration>
-              <finalName>pack</finalName>
+              <finalName>csvToOut</finalName>
               <transformers>
                 <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                  <mainClass>ru.job4j.io.Zip</mainClass>
+                  <mainClass>ru.job4j.csv.CSVReader</mainClass>
                 </transformer>
               </transformers>
             </configuration>
