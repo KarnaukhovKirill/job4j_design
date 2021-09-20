@@ -1,8 +1,8 @@
 package ru.job4j.cache;
 
-import ru.job4j.io.Search;
-
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.NoSuchFileException;
 import java.nio.file.Path;
 
 public class DirFileCache extends AbstractCache<String, String> {
@@ -14,32 +14,17 @@ public class DirFileCache extends AbstractCache<String, String> {
     @Override
     protected String load(String key) {
         String rsl = null;
-        Path dir = Path.of(cachingDir);
-        Search searcher = new Search();
+        Path dir = Path.of(cachingDir, key);
         try {
-            var listFiles = searcher.search(dir, p -> p.toFile().getName().endsWith(key));
-            if (listFiles.size() == 0) {
-                rsl = "Cant find file";
-            } else {
-                rsl = getStringFromFile(listFiles.get(0));
-                put(key, rsl);
-            }
+            rsl = Files.readString(dir);
+            put(key, rsl);
+        } catch (NoSuchFileException fileE) {
+            System.out.println("Check cache path and file name");
+            System.out.printf("Cache path is -----%s----- \n", cachingDir);
+            System.out.printf("File name is -----%s----- \n", key);
         } catch (IOException e) {
             e.printStackTrace();
         }
         return rsl;
-    }
-
-    private String getStringFromFile(Path path) {
-        StringBuilder text = new StringBuilder();
-        try (BufferedReader in = new BufferedReader(new FileReader(path.toString()))) {
-            in.lines().forEach(s -> {
-                text.append(s);
-                text.append("\n");
-            });
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return text.toString();
     }
 }
