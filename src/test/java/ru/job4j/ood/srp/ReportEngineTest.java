@@ -14,13 +14,13 @@ public class ReportEngineTest {
         Employee worker = new Employee("Ivan", now, now, 100);
         store.add(worker);
         Report engine = new ReportEngine(store);
-        String expect = "Name; Hired; Fired; Salary;" +
-                System.lineSeparator() +
-                worker.getName() + ";" +
-                worker.getHired() + ";" +
-                worker.getFired() + ";" +
-                worker.getSalary() + ";" +
-                System.lineSeparator();
+        String expect = "Name; Hired; Fired; Salary;"
+                + System.lineSeparator()
+                + worker.getName() + ";"
+                + worker.getHired() + ";"
+                + worker.getFired() + ";"
+                + worker.getSalary() + ";"
+                + System.lineSeparator();
         assertThat(engine.generate(em -> true), is(expect));
     }
 
@@ -51,14 +51,14 @@ public class ReportEngineTest {
         store.add(worker01);
         store.add(worker02);
         Report engine = new ReportHR(store);
-        String expect = "Name; Salary;" +
-                System.lineSeparator() +
-                worker02.getName() + ";" +
-                worker02.getSalary() + ";" +
-                System.lineSeparator() +
-                worker01.getName() + ";" +
-                worker01.getSalary() + ";" +
-                System.lineSeparator();
+        String expect = "Name; Salary;"
+                +System.lineSeparator()
+                + worker02.getName() + ";"
+                + worker02.getSalary() + ";"
+                + System.lineSeparator()
+                + worker01.getName() + ";"
+                + worker01.getSalary() + ";"
+                + System.lineSeparator();
         assertThat(engine.generate(em -> true), is(expect));
     }
 
@@ -69,13 +69,13 @@ public class ReportEngineTest {
         Employee worker01 = new Employee("Ivan", now, now, 100);
         store.add(worker01);
         Report engine = new ReportBookkeepers(store);
-        String expect = "Name; Hired; Fired; Salary;" +
-                System.lineSeparator() +
-                worker01.getName() + ";" +
-                worker01.getHired() + ";" +
-                worker01.getFired() + ";" +
-                7300.0 + ";" +
-                System.lineSeparator();
+        String expect = "Name; Hired; Fired; Salary;"
+                + System.lineSeparator()
+                + worker01.getName() + ";"
+                + worker01.getHired() + ";"
+                + worker01.getFired() + ";"
+                + 7300.0 + ";"
+                + System.lineSeparator();
         assertThat(engine.generate(em -> true), is(expect));
     }
 }
