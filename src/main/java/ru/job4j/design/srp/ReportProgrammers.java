@@ -1,26 +1,29 @@
-package ru.job4j.ood.srp;
+package ru.job4j.design.srp;
 
 import java.util.function.Predicate;
 
-public class ReportEngine implements Report {
+public class ReportProgrammers implements Report {
     private Store store;
 
-    public ReportEngine(Store store) {
+    public ReportProgrammers(Store store) {
         this.store = store;
     }
 
     @Override
     public String generate(Predicate<Employee> filter) {
         StringBuilder text = new StringBuilder();
-        text.append("Name; Hired; Fired; Salary;");
+        text.append("<html><body>")
+                .append("<h1>Список работников</h1>")
+                .append("<p>Name; Hired; Fired; Salary;</p>");
         for (Employee employee : store.findBy(filter)) {
-            text.append(System.lineSeparator())
+            text.append("<p>")
                     .append(employee.getName()).append(";")
                     .append(employee.getHired()).append(";")
                     .append(employee.getFired()).append(";")
                     .append(employee.getSalary()).append(";")
-                    .append(System.lineSeparator());
+                    .append("</p>");
         }
+        text.append("</body></html>");
         return text.toString();
     }
 }

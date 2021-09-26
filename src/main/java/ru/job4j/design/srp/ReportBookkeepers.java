@@ -1,6 +1,5 @@
-package ru.job4j.ood.srp;
+package ru.job4j.design.srp;
 
-import java.util.Comparator;
 import java.util.function.Predicate;
 
 public class ReportBookkeepers implements Report {
