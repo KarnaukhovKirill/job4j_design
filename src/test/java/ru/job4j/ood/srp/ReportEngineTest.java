@@ -52,7 +52,7 @@ public class ReportEngineTest {
         store.add(worker02);
         Report engine = new ReportHR(store);
         String expect = "Name; Salary;"
-                +System.lineSeparator()
+                + System.lineSeparator()
                 + worker02.getName() + ";"
                 + worker02.getSalary() + ";"
                 + System.lineSeparator()
