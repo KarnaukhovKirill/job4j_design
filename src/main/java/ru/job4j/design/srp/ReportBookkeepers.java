@@ -18,7 +18,7 @@ public class ReportBookkeepers implements Report {
                     .append(employee.getName()).append(";")
                     .append(employee.getHired()).append(";")
                     .append(employee.getFired()).append(";")
-                    .append(employee.getSalary() * 73).append(";") //зарплата в долларах
+                    .append(employee.getSalary() * 73).append(";")
                     .append(System.lineSeparator());
         }
         return text.toString();

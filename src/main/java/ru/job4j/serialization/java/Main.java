@@ -9,7 +9,7 @@ public class Main {
         Book[] books = new Book[] {new Book("East Asia at the Center", 150),
                 new Book("1941-1945", 250)};
         BookShelf firstShelf = new BookShelf(true, Genre.HISTORY, books);
-        JSONArray jsonBooks = new JSONArray(firstShelf.getBooks());  //jsonObject из массива
+        JSONArray jsonBooks = new JSONArray(firstShelf.getBooks());
         System.out.println(jsonBooks);
         JSONObject jsonCountry = new JSONObject("{\"Russia\":\"Best country\"}");
         System.out.println(jsonCountry);
@@ -19,7 +19,7 @@ public class Main {
         fullBookShelf.put("countPlace", firstShelf.getCountPlace());
         fullBookShelf.put("name", firstShelf.getName());
         fullBookShelf.put("books", jsonBooks);
-        System.out.println(fullBookShelf);  //Созданная вручную строка json
-        System.out.println(new JSONObject(firstShelf).toString()); //Преобразование объекта BookShelf в json строку
+        System.out.println(fullBookShelf);
+        System.out.println(new JSONObject(firstShelf).toString());
     }
 }

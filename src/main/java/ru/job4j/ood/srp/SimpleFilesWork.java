@@ -5,13 +5,17 @@ import java.util.List;
 public class SimpleFilesWork implements FilesWork<String> {
     @Override
     public List<String> input(String fileName) {
-        //создаём метод добавления String в коллекцию
+        /*
+        создаём метод добавления String в коллекцию
+         */
         return null;
     }
 
     @Override
     public List<String> order(List<String> inputList) {
-        //создаём метод сортировки
+        /*
+        создаём метод сортировки
+         */
         return null;
     }
 }

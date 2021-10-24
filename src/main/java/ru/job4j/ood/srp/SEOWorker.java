@@ -3,16 +3,22 @@ package ru.job4j.ood.srp;
 public class SEOWorker implements Worker {
     @Override
     public void code() {
-        //не умеет
+        /*
+        не умеет
+         */
     }
 
     @Override
     public void businessConversation() {
-        //не умеет
+        /*
+        не умеет
+         */
     }
 
     @Override
     public void seoWork() {
-        //решает как Бог
+        /*
+        Решает как Бог
+         */
     }
 }

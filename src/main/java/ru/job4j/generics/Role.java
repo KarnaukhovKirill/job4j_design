@@ -24,6 +24,4 @@ public class Role extends Base {
         Role newUser = (Role) obj;
         return getId().equals(newUser.getId());
     }
-
-    //comment for commit
 }
