@@ -66,7 +66,7 @@
     <dependency>
       <groupId>org.postgresql</groupId>
       <artifactId>postgresql</artifactId>
-      <version>42.2.23</version>
+      <version>42.2.24.jre7</version>
     </dependency>
   </dependencies>
 
@@ -83,10 +83,10 @@
               <goal>shade</goal>
             </goals>
             <configuration>
-              <finalName>csvToOut</finalName>
+              <finalName>duplicatesFinder</finalName>
               <transformers>
                 <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                  <mainClass>ru.job4j.csv.CSVReader</mainClass>
+                  <mainClass>ru.job4j.io.duplicates.DuplicatesFinder</mainClass>
                 </transformer>
               </transformers>
             </configuration>
