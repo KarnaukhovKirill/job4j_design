@@ -19,8 +19,8 @@ public class ReportEngineTest {
         String expect = "Name; Hired; Fired; Salary;"
                 + System.lineSeparator()
                 + worker.getName() + ";"
-                + worker.getHired() + ";"
-                + worker.getFired() + ";"
+                + worker.getHired().getTime() + ";"
+                + worker.getFired().getTime() + ";"
                 + worker.getSalary() + ";"
                 + System.lineSeparator();
         assertThat(engine.generate(em -> true), is(expect));
@@ -37,8 +37,8 @@ public class ReportEngineTest {
                             + "<h1>Список работников</h1>"
                             + "<p>Name; Hired; Fired; Salary;</p><p>"
                             + worker01.getName() + ";"
-                            + worker01.getHired() + ";"
-                            + worker01.getFired() + ";"
+                            + worker01.getHired().getTime() + ";"
+                            + worker01.getFired().getTime() + ";"
                             + worker01.getSalary() + ";"
                             + "</p></body></html>";
         assertThat(engine.generate(em -> true), is(expected));
@@ -74,8 +74,8 @@ public class ReportEngineTest {
         String expect = "Name; Hired; Fired; Salary;"
                 + System.lineSeparator()
                 + worker01.getName() + ";"
-                + worker01.getHired() + ";"
-                + worker01.getFired() + ";"
+                + worker01.getHired().getTime() + ";"
+                + worker01.getFired().getTime() + ";"
                 + 7300.0 + ";"
                 + System.lineSeparator();
         assertThat(engine.generate(em -> true), is(expect));
