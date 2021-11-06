@@ -4,8 +4,11 @@ import static org.junit.Assert.assertThat;
 import static org.hamcrest.Matchers.is;
 import com.google.gson.GsonBuilder;
 import org.junit.Test;
+
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.TimeZone;
 
 public class ReportEngineTest {
     String ls = "\n";
@@ -84,14 +87,21 @@ public class ReportEngineTest {
 
     @Test
     public void whenXMLReportGenerator() {
+        Calendar firstDate = Calendar.getInstance();
+        firstDate.setTimeZone(TimeZone.getDefault());
+        firstDate.set(2018, Calendar.JANUARY, 1);
+        Calendar secondDate = Calendar.getInstance();
+        secondDate.setTimeZone(TimeZone.getDefault());
+        secondDate.set(2021, Calendar.DECEMBER, 12);
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         MemStore store = new MemStore();
         Employee worker01 = new Employee("Kirill",
-                new GregorianCalendar(2018, Calendar.JANUARY, 1),
-                new GregorianCalendar(2021, Calendar.DECEMBER, 12),
+                firstDate,
+                secondDate,
                 100.00D);
         Employee worker02 = new Employee("Ivan",
-                new GregorianCalendar(2019, Calendar.JANUARY, 1),
-                new GregorianCalendar(2022, Calendar.JANUARY, 1),
+                firstDate,
+                secondDate,
                 150D);
         store.add(worker01);
         store.add(worker02);
@@ -99,14 +109,14 @@ public class ReportEngineTest {
         String expect = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>" + ls
                 + "<Employees>" + ls
                 + "    <employees>" + ls
-                + "        <fired>2021-12-12T00:00:00+03:00</fired>" + ls
-                + "        <hired>2018-01-01T00:00:00+03:00</hired>" + ls
+                + "        <fired>" + dateFormat.format(worker01.getFired().getTime()) + "</fired>" + ls
+                + "        <hired>" + dateFormat.format(worker01.getHired().getTime()) + "</hired>" + ls
                 + "        <name>Kirill</name>" + ls
                 + "        <salary>100.0</salary>" + ls
                 + "    </employees>"  + ls
                 + "    <employees>"  + ls
-                + "        <fired>2022-01-01T00:00:00+03:00</fired>" + ls
-                + "        <hired>2019-01-01T00:00:00+03:00</hired>" + ls
+                + "        <fired>" + dateFormat.format(worker02.getFired().getTime()) + "</fired>" + ls
+                + "        <hired>" + dateFormat.format(worker02.getHired().getTime()) + "</hired>" + ls
                 + "        <name>Ivan</name>" + ls
                 + "        <salary>150.0</salary>" + ls
                 + "    </employees>" + ls

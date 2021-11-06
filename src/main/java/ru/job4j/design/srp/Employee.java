@@ -1,5 +1,7 @@
 package ru.job4j.design.srp;
 
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.util.Calendar;
 import java.util.Objects;
 
@@ -27,6 +29,8 @@ public class Employee {
         this.name = name;
     }
 
+    @XmlElement(name = "hired", required = true)
+    @XmlJavaTypeAdapter(DateAdapter.class)
     public Calendar getHired() {
         return hired;
     }
@@ -35,6 +39,8 @@ public class Employee {
         this.hired = hired;
     }
 
+    @XmlElement(name = "fired", required = true)
+    @XmlJavaTypeAdapter(DateAdapter.class)
     public Calendar getFired() {
         return fired;
     }
