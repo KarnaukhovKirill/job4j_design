@@ -19,7 +19,7 @@ public abstract class Parking<T extends Car> {
         return new ArrayList<>(cars);
     }
 
-    private int indexOf(Car car) {
+    private int indexOf(T car) {
         return -1;
     }
 }
