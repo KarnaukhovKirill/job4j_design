@@ -1,6 +1,5 @@
 package ru.job4j.design.lsp.storage;
 
-import java.time.Duration;
 import java.util.Calendar;
 import java.util.Objects;
 import java.util.TimeZone;
@@ -60,14 +59,6 @@ public class Food {
 
     public void setDiscount(int discount) {
         this.discount = discount;
-    }
-
-    public float percent() {
-        Calendar now = Calendar.getInstance();
-        now.setTimeZone(timeZone);
-        Duration createToExpire = Duration.between(createDate.getTime().toInstant(), expiryDate.getTime().toInstant());
-        Duration nowToExpire = Duration.between(now.getTime().toInstant(), expiryDate.getTime().toInstant());
-        return 100 - (float) nowToExpire.toDaysPart() / createToExpire.toDaysPart() * 100;
     }
 
     @Override

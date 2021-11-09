@@ -1,26 +1,10 @@
 package ru.job4j.design.lsp.storage;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class Shop implements Storage<Food> {
-    private List<Food> foods = new ArrayList<>();
+public class Shop<T extends Food> extends Storage<T> {
 
     @Override
-    public void save(Food food) {
-        if (quality(food)) {
-            foods.add(food);
-        }
-    }
-
-    @Override
-    public List<Food> getFoods() {
-        return foods;
-    }
-
-    @Override
-    public boolean quality(Food food) {
-        var quality = food.percent();
+    public boolean canAccept(T food) {
+        var quality = this.getPercent(food);
         if (quality > 75 && quality < 100) {
             food.setDiscount(30);
         }

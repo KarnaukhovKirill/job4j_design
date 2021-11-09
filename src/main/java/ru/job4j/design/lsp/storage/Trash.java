@@ -1,27 +1,12 @@
 package ru.job4j.design.lsp.storage;
 
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.List;
 import java.util.TimeZone;
 
-public class Trash implements Storage<Food> {
-    private List<Food> foods = new ArrayList<>();
+public class Trash<T extends Food> extends Storage<T> {
 
     @Override
-    public void save(Food food) {
-        if (quality(food)) {
-            foods.add(food);
-        }
-    }
-
-    @Override
-    public List<Food> getFoods() {
-        return foods;
-    }
-
-    @Override
-    public boolean quality(Food food) {
+    public boolean canAccept(T food) {
         Calendar now = Calendar.getInstance();
         now.setTimeZone(TimeZone.getDefault());
         return now.after(food.getExpiryDate());
