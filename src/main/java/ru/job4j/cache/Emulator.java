@@ -3,7 +3,7 @@ package ru.job4j.cache;
 import java.util.Scanner;
 
 public class Emulator {
-    private static AbstractCache cache;
+    private static AbstractCache<String, String> cache;
     private static final Scanner SCANNER = new Scanner(System.in);
 
     public static void main(String[] args) {
@@ -11,10 +11,10 @@ public class Emulator {
     }
 
     private void showMenu() {
-        System.out.println("Select menu: " + "\n"
-                + "1. Choose cache folder" + "\n"
-                + "2. Load .txt file to cache" + "\n"
-                + "3. Get info from cache" + "\n"
+        System.out.println("Select menu: " + System.lineSeparator()
+                + "1. Choose cache folder" + System.lineSeparator()
+                + "2. Load .txt file to cache" + System.lineSeparator()
+                + "3. Get info from cache" + System.lineSeparator()
                 + "4. Exit");
     }
 
@@ -34,7 +34,7 @@ public class Emulator {
             } else if (select == 3) {
                 System.out.println("Write file name in format name.txt");
                 String file = SCANNER.nextLine();
-                var txt = (String) cache.get(file);
+                var txt = cache.get(file);
                 System.out.println(txt);
             } else if (select < 0 || select > 3) {
                 run = false;
