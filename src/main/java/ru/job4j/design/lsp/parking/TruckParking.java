@@ -13,18 +13,17 @@ public class TruckParking<T extends Car> implements Parking<T> {
 
     @Override
     public boolean park(T car) {
-        cars.add(car);
-        maxCount--;
-        return true;
+        boolean result = false;
+        if (car.getSize() > 1 && maxCount >= 1) {
+            cars.add(car);
+            maxCount--;
+            result = true;
+        }
+        return result;
     }
 
     @Override
     public List<T> getCars() {
         return new ArrayList<>(cars);
-    }
-
-    @Override
-    public int getMaxCount() {
-        return maxCount;
     }
 }

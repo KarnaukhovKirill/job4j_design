@@ -12,15 +12,7 @@ public class ParkingControl<T extends Car> {
     }
 
     public boolean distribute(T car) {
-        if (car.getSize() == PassengerCar.DEFAULT_SIZE && passengerParking.getMaxCount() >= 1) {
-            return passengerParking.park(car);
-        }
-        if (car.getSize() > PassengerCar.DEFAULT_SIZE && truckParking.getMaxCount() >= 1) {
-            return truckParking.park(car);
-        } else if (car.getSize() <= passengerParking.getMaxCount()) {
-            return passengerParking.park(car);
-        }
-        return false;
+        return truckParking.park(car) || passengerParking.park(car);
     }
 
     public List<T> getPassengerCars() {
