@@ -18,9 +18,9 @@ public class ControlQualityTest {
 
     @Before
     public void init() {
-        shop = new Shop();
-        warehouse = new Warehouse();
-        trash = new Trash();
+        shop = new Shop<>();
+        warehouse = new Warehouse<>();
+        trash = new Trash<>();
         controlQuality = new ControlQuality<>(List.of(shop, warehouse, trash));
     }
 
@@ -63,5 +63,24 @@ public class ControlQualityTest {
         assertThat(buckwheat.getDiscount(), is(0));
         controlQuality.distribute(buckwheat);
         assertThat(buckwheat.getDiscount(), is(30));
+    }
+
+    @Test
+    public void whenRestore() {
+        Grain buckwheat = new Grain("Grecha",
+                new GregorianCalendar(2021, Calendar.AUGUST, 21),
+                new GregorianCalendar(2025, Calendar.JANUARY, 1),
+                150);
+        Milk goodMilk = new Milk("Good Milk",
+                new GregorianCalendar(2021, Calendar.NOVEMBER, 1),
+                new GregorianCalendar(2025, Calendar.NOVEMBER, 31),
+                60.00F);
+        controlQuality.distribute(buckwheat);
+        controlQuality.distribute(goodMilk);
+        assertThat(warehouse.getFoods(), is(List.of(buckwheat, goodMilk)));
+        buckwheat.setExpiryDate(new GregorianCalendar(2020, Calendar.DECEMBER, 31));
+        goodMilk.setExpiryDate(new GregorianCalendar(2020, Calendar.DECEMBER, 31));
+        controlQuality.resort();
+        assertThat(trash.getFoods(), is(List.of(buckwheat, goodMilk)));
     }
 }

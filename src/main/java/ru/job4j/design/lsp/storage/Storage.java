@@ -39,4 +39,8 @@ public abstract class Storage<T extends Food> {
                 food.getExpiryDate().getTime().toInstant());
         return 100 - (float) nowToExpire.toDaysPart() / createToExpire.toDaysPart() * 100;
     }
+
+    public void clear() {
+        foods.clear();
+    }
 }
