@@ -14,7 +14,7 @@ public class TruckParking<T extends Car> implements Parking<T> {
     @Override
     public boolean park(T car) {
         boolean result = false;
-        if (car.getSize() > 1 && maxCount >= 1) {
+        if (car.getSize() > PassengerCar.DEFAULT_SIZE && maxCount >= 1) {
             cars.add(car);
             maxCount--;
             result = true;
