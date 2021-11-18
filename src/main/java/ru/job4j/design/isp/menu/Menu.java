@@ -13,14 +13,6 @@ import java.util.*;
  */
 public class Menu {
     private List<Item> elements = new ArrayList<>();
-
-    public Menu() {
-    }
-
-    public Menu(Item root) {
-        elements.add(root);
-    }
-
     /**
      * Метод добавляет подзадачу. Если нужна новая, глобальная задача, то в parentName можно вбить "Новая задача".
      * @param parentName имя главной задачи
@@ -76,8 +68,9 @@ public class Menu {
     }
 
     /**
-     * Эксперементальный метод. Сделан больше для теста, чтобы проверить items в коллекции elements.
-     * @return дубликаты "рутовых" Item
+     * Эксперементальный метод.
+     * Сделан больше для теста, чтобы проверить items в коллекции elements.
+     * @return дубликаты "коневых" Item
      */
     public List<Item> getRoots() {
         List<Item> result = new ArrayList<>();
