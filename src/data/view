@@ -1,0 +1,6 @@
+create view show_all_orders_of_Ivan_Ivanov
+	as select o.id as order_id, b.id as book_id, a.name as author, b.name as book_name, s.name as student from orders as o
+		join students s on o.student_id = s.id
+		join books b on o.book_id = b.id
+		join authors a on a.id = b.author_id
+		where s.name = 'Иван Иванов';
